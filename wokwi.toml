@@ -1,0 +1,12 @@
+[wokwi]
+version=1
+firmware='.pio/build/uno/firmware_1.2.3_uno.hex'
+elf='.pio/build/uno/firmware_1.2.3_uno.elf'
+
+[[chip]]
+name = '24c01'  # To use the chip in diagram.json, add a part with "chip-24c01" type.
+binary = 'chips/24c01.chip.wasm'
+
+[[chip]]
+name = 'PCF8574'  # To use the chip in diagram.json, add a part with "chip-PCF8574" type.
+binary = 'chips/PCF8574.chip.wasm'

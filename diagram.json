@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "author": "Ben Jackson",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-mega", "id": "mega", "top": 0, "left": 0, "attrs": {} },
+    { "type": "board-ssd1306", "id": "oled1", "top": 1.55, "left": 411.39, "attrs": {} },
+    { "type": "wokwi-vcc", "id": "vcc1", "top": -29.69, "left": 449.1, "attrs": {} },
+    { "type": "wokwi-gnd", "id": "gnd2", "top": -0.52, "left": 388.27, "attrs": {} },
+    {
+      "type": "chip-24c01",
+      "id": "chip1",
+      "top": -190,
+      "left": 403.38,
+      "rotate": 180,
+      "attrs": {}
+    },
+    { "type": "chip-PCF8574", "id": "chip2", "top": -134.84, "left": 401.22, "attrs": {} },
+    {
+      "type": "wokwi-ntc-temperature-sensor",
+      "id": "ntc1",
+      "top": 204.74,
+      "left": 225.79,
+      "rotate": 180,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-ky-040",
+      "id": "encoder1",
+      "top": -15.2,
+      "left": 506.15,
+      "rotate": 270,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-gnd",
+      "id": "gnd1",
+      "top": -78.76,
+      "left": 575.61,
+      "rotate": 180,
+      "attrs": {}
+    },
+    { "type": "wokwi-vcc", "id": "vcc2", "top": -64.88, "left": 552.22, "attrs": {} },
+    { "type": "wokwi-gnd", "id": "gnd3", "top": -91.8, "left": 345.24, "attrs": {} },
+    { "type": "wokwi-vcc", "id": "vcc3", "top": -82.66, "left": 369.4, "attrs": {} },
+    { "type": "wokwi-gnd", "id": "gnd4", "top": -177.96, "left": 519.15, "attrs": {} },
+    { "type": "wokwi-vcc", "id": "vcc5", "top": -214.33, "left": 379.91, "attrs": {} }
+  ],
+  "connections": [
+    [ "vcc1:VCC", "oled1:VCC", "red", [ "v0" ] ],
+    [ "gnd2:GND", "oled1:GND", "black", [ "h-0.44", "v-18.24", "h51.53" ] ],
+    [ "oled1:SCL", "mega:21", "green", [ "v-44.04", "h-130.96" ] ],
+    [ "oled1:SDA", "mega:20", "green", [ "v-50.36", "h-150.29" ] ],
+    [ "gnd1:GND", "encoder1:GND", "black", [ "h0.01", "v8.76" ] ],
+    [ "encoder1:VCC", "vcc2:VCC", "red", [ "h0" ] ],
+    [ "chip2:SCL", "mega:21", "green", [ "h0" ] ],
+    [ "chip2:SDA", "mega:20", "green", [ "h0" ] ],
+    [ "chip2:GND", "gnd3:GND", "black", [ "h0" ] ],
+    [ "vcc3:VCC", "chip2:VCC", "red", [ "h19.03", "v-32.46" ] ],
+    [ "encoder1:SW", "chip2:P0", "green", [ "v0" ] ],
+    [ "encoder1:DT", "chip2:P1", "green", [ "v0" ] ],
+    [ "encoder1:CLK", "chip2:P2", "green", [ "v0" ] ],
+    [ "chip1:GND", "gnd4:GND", "black", [ "h0" ] ],
+    [ "chip1:VCC", "vcc5:VCC", "red", [ "v-0.08", "h13.28" ] ],
+    [ "chip1:SCL", "mega:21", "green", [ "h0" ] ],
+    [ "chip1:SDA", "mega:20", "green", [ "h0" ] ],
+    [ "mega:A0", "ntc1:OUT", "green", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}

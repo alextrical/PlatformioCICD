@@ -1,3 +1,38 @@
+# Extrusion/Pulltrusion control system, with Display
+
+This is a Extrusion control system for Arduino with a OLED display to show and edit the settings without the need for a PC. 
+
+The online version can be found at https://wokwi.com/projects/......
+
+## Build the project
+
+This is a [PlatformIO](https://platformio.org) project. To build it, [install PlatformIO](https://docs.platformio.org/en/latest/core/installation/index.html), and then run the following command:
+
+```
+pio run
+```
+
+## Simulate the project
+
+To simulate this project, install [Wokwi for VS Code](https://marketplace.visualstudio.com/items?itemName=wokwi.wokwi-vscode). Open the project directory in Visual Studio Code, press **F1** and select "Wokwi: Start Simulator".
+
+ * ----------------------------------------------------------------------------------
+
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+
 ## CI&CD example project setup
 
 Project that contains: platformio setup, arduino framework, unit test, integration tests and pipeline for CI & CD (Github Actions)
