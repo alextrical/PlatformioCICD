@@ -34,6 +34,6 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            LICENSE.txt
-            *.hex
-            .pio/build/uno/firmware.hex
+            .pio/build/*/*.hex
+            # LICENSE.txt
+            # *.hex
