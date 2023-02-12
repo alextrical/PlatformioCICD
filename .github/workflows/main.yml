@@ -8,17 +8,43 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
+    - name: Cache pip
+      uses: actions/cache@v3
       with:
-        python-version: '3.7' 
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
 
-    - name: Install dependencies
+    - name: Cache PlatformIO
+      uses: actions/cache@v3
+      with:
+        path: ~/.platformio
+        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+
+    - name: Select Python 3.7
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.7' # Version range or exact version of a Python version to use, using semvers version range syntax.
+        architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+
+    - name: Install PlatformIO
       run: |
-        python -m pip install --upgrade pip
-        pip install -U https://github.com/platformio/platformio-core/archive/v5.0.1.zip
+        pip install -U platformio
+        pio upgrade --dev
+        pio pkg update --global
+
+    # - name: Set up Python
+    #   uses: actions/setup-python@v3
+    #   with:
+    #     python-version: '3.7' 
+
+    # - name: Install dependencies
+    #   run: |
+    #     python -m pip install --upgrade pip
+    #     pip install -U https://github.com/platformio/platformio-core/archive/v6.1.6.zip
 
     # - name: Run Unit Tests
     #   run: platformio test --environment native -f unit -v
