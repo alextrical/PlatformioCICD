@@ -1,9 +1,15 @@
-name: cicd project
-on: [push]
+name: "pre-release"
+
+on:
+  push:
+    branches:
+      - "master"
+    tags-ignore:
+      - "*"
 
 jobs:
-  build-and-tests:
-    name: Build & Tests
+  gh_pre_release:
+    name: Build & Tests pre release
     runs-on: ubuntu-latest
 
     steps:
@@ -48,34 +54,48 @@ jobs:
 
     # - name: Run Unit Tests
     #   run: platformio test --environment native -f unit -v
+
+    - name: "Build & test"
+      run: |
+        echo "done!"
+
+    - uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.PUBLISH_TOKEN }}"
+        automatic_release_tag: "latest"
+        prerelease: true
+        title: "Development Build"
+        files: |
+          LICENSE.txt
+          *.bin
     
     # - name: Run Integration Tests
     #   run: platformio remote test --environment uno --ignore unit
     #   env:
     #     PLATFORMIO_AUTH_TOKEN: ${{ secrets.platformioAgent }}
 
-  deploy-firmware:
-    name: Deploy firmware
-    needs: build-and-tests
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: '3.7' 
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -U platformio
-        pio upgrade --dev
-        pio pkg update --global
-    
-    - name: Deploy firmware
-      run: platformio remote run --environment uno --target upload
-      env: 
-        PLATFORMIO_AUTH_TOKEN: ${{ secrets.platformioAgent }}
+#   deploy-firmware:
+#     name: Deploy firmware
+#     needs: build-and-tests
+#     runs-on: ubuntu-latest
+#
+#     steps:
+#     - name: Checkout repository
+#       uses: actions/checkout@v3
+#
+#     - name: Set up Python
+#       uses: actions/setup-python@v3
+#       with:
+#         python-version: '3.7'
+#
+#     - name: Install dependencies
+#       run: |
+#         python -m pip install --upgrade pip
+#         pip install -U platformio
+#         pio upgrade --dev
+#         pio pkg update --global
+#
+#     - name: Deploy firmware
+#       run: platformio remote run --environment uno --target upload
+#       env:
+#         PLATFORMIO_AUTH_TOKEN: ${{ secrets.platformioAgent }}
