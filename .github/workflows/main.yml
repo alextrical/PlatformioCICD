@@ -1,11 +1,14 @@
-name: "pre-release"
+# name: "pre-release"
+#
+# on:
+#   push:
+#     branches:
+#       - "master"
+#     tags-ignore:
+#       - "*"
 
-on:
-  push:
-    branches:
-      - "master"
-    tags-ignore:
-      - "*"
+name: cicd project
+on: [push]
 
 jobs:
   gh_pre_release:
