@@ -26,17 +26,6 @@ jobs:
       - name: "Build & test"
         run: |
           echo "done!"
-
-      - uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.PUBLISH_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: true
-          title: "Development Build"
-          files: |
-            .pio/build/*/*.hex
-            # LICENSE.txt
-            # *.hex
           
   # The release job only runs when you push a tag starting with "v", e.g. v1.0.0 
   release:
