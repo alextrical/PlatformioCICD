@@ -86,7 +86,7 @@ jobs:
         title: "Development Build"
         files: |
           *.bin
-          # LICENSE.txt
+        #LICENSE.txt
     
     # - name: Run Integration Tests
     #   run: platformio remote test --environment uno --ignore unit
