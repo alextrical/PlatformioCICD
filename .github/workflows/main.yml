@@ -76,6 +76,7 @@ jobs:
         files: |
           LICENSE.txt
           *.hex
+          .pio/build/uno/firmware.hex
     
     # - name: Run Integration Tests
     #   run: platformio remote test --environment uno --ignore unit
