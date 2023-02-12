@@ -15,35 +15,51 @@ jobs:
     name: Build & Tests pre release
     runs-on: ubuntu-latest
 
+    # steps:
+    # - name: Checkout repository
+    #   uses: actions/checkout@v3
+    #
+    # - name: Cache pip
+    #   uses: actions/cache@v3
+    #   with:
+    #     path: ~/.cache/pip
+    #     key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-pip-
+    #
+    # - name: Cache PlatformIO
+    #   uses: actions/cache@v3
+    #   with:
+    #     path: ~/.platformio
+    #     key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+    #
+    # - name: Select Python 3.7
+    #   uses: actions/setup-python@v3
+    #   with:
+    #     python-version: '3.7' # Version range or exact version of a Python version to use, using semvers version range syntax.
+    #     architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+
+    # - name: Install PlatformIO
+    #   run: |
+    #     pip install -U platformio
+    #     pio upgrade --dev
+    #     pio pkg update --global
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Cache pip
-      uses: actions/cache@v3
+    - uses: actions/checkout@v3
+    - uses: actions/cache@v3
       with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-
-    - name: Cache PlatformIO
-      uses: actions/cache@v3
+        path: |
+        ~/.cache/pip
+        ~/.platformio/.cache
+        key: ${{ runner.os }}-pio
+    - uses: actions/setup-python@v4
       with:
-        path: ~/.platformio
-        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+        python-version: '3.9'
+    - name: Install PlatformIO Core
+      run: pip install --upgrade platformio
 
-    - name: Select Python 3.7
-      uses: actions/setup-python@v3
-      with:
-        python-version: '3.7' # Version range or exact version of a Python version to use, using semvers version range syntax.
-        architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
-
-    - name: Install PlatformIO
-      run: |
-        pip install -U platformio
-        pio upgrade --dev
-        pio pkg update --global
+    - name: Build PlatformIO Project
+      run: pio run
 
     # - name: Set up Python
     #   uses: actions/setup-python@v3
@@ -69,8 +85,8 @@ jobs:
         prerelease: true
         title: "Development Build"
         files: |
-          LICENSE.txt
           *.bin
+          # LICENSE.txt
     
     # - name: Run Integration Tests
     #   run: platformio remote test --environment uno --ignore unit
