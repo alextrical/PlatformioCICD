@@ -1,7 +1,7 @@
 [wokwi]
 version=1
-firmware='.pio/build/uno/firmware_1.2.3_uno.hex'
-elf='.pio/build/uno/firmware_1.2.3_uno.elf'
+firmware='.pio/build/mega/firmware_mega.hex'
+elf='.pio/build/mega/firmware_mega.elf'
 
 [[chip]]
 name = '24c01'  # To use the chip in diagram.json, add a part with "chip-24c01" type.
